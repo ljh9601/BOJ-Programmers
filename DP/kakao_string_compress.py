@@ -1,3 +1,4 @@
+#카카오 2020 코딩테스트 1번 문제
 def solution(string):
     dp = []
     dp.append(0)
