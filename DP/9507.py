@@ -14,8 +14,7 @@ inputs = [0] * tcNum
 for i in range(tcNum):
     inputs[i] = int(sys.stdin.readline().strip())
 dp[4] = 8
-for i in range(0, max(inputs)):
-    j = 1
+for i in range(0, max(inputs)+1):
     if i < 2 : 
         dp[i] = 1
         continue
@@ -25,11 +24,7 @@ for i in range(0, max(inputs)):
     if i == 3 :
         dp[i] = 4
         continue
-    else:
-        j *= 2
-        dp[i] = dp[i-1] * 2 - j
+    elif i > 4:
+        dp[i] = dp[i-1] * 2 - dp[i-5]
 for i in range(0, tcNum):
     print(dp[inputs[i]])
-
-1 1 2 4 8 15 29 56 108 208
-            1  2  4   8
