@@ -18,7 +18,7 @@ dy = [0, 0, 1, -1]
 def dfs(x, y):
     if dp[x][y]:
         return dp[x][y]
-    dp[x][y] = 1
+    dp[x][y] = True
     for i in range(0, 4):
         nx = x + dx[i]
         ny = y + dy[i]
