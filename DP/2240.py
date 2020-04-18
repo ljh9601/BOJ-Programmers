@@ -5,7 +5,7 @@
 # 문제 출처 : 백준 온라인 저지
 # 알고리즘 분류 : 다이나믹 프로그래밍
 # 자두가 받을 수 있는 자두의 개수
-# dp의 정의 :
+# dp의 정의 : dp[n][m][k] : m초일 때 n번 나무에 있는 자두가 k번 이동해서 얻을 수 있는 최대 자두 개수
 import sys
 
 t, w = map(int, sys.stdin.readline().strip().split())
