@@ -5,40 +5,35 @@
 # 문제 출처 : 백준 온라인 저지
 # 알고리즘 분류 : DFS
 # 어느 프로젝트 팀에도 속하지 않는 학생들의 수
+# 싸이클을 이루지 않는 학생 수를 구하면 됨!
 import sys
 from collections import deque
 
+team = []
+
 def dfs(start):
+    global team
+    cycle = []
     stack = deque()
     stack.appendleft(start)
-    count = 0
-    temp = []
     while stack :
         current = stack.pop()
-        if not visited[current] :
-            visited[current] = True
-        if current not in temp :
-            temp.append(current)
-        if current in choice[start] :
-            temp = [start, current]
-        if start in choice[current]:
-            count += len(temp)
-            return count
-        for i in choice[current] :
-            if not visited[i] :
-                stack.append(i)
-    return 0
+        visited[current] = True
+        nextIt = choice[current]
+        cycle.append(current)
+        if not visited[nextIt] :
+            stack.append(nextIt)
+        else :
+            if nextIt in cycle :
+                team += cycle[cycle.index(nextIt):]
 
 tcNum = int(sys.stdin.readline().strip())
 for _ in range(tcNum):
     n = int(sys.stdin.readline().strip())
+    team = []
     visited = [False] * (n+1)
-    choice = [[] for __ in range(n+1)]
-    temp = list(map(int, sys.stdin.readline().strip().split()))
+    choice = [0] + list(map(int, sys.stdin.readline().strip().split()))
     for i in range(1, n+1):
-         choice[temp[i-1]].append(i)
-    ans = 0
-    for i in range(1, n+1):
-        if len(choice[i]) > 0 and not visited[i]:
-            ans += dfs(i)
-    print(n - ans)
+        if not visited[i]:
+            dfs(i)
+    print(n - len(team))
