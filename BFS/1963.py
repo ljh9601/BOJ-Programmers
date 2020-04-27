@@ -17,34 +17,37 @@ def isPrime(num):
             return False
     return True
 
-def primeList():
-    prime = []
-    for i in range(1000, 10000):
-        if isPrime(i) :
-            prime.append(i)
-    return prime
-
 def bfs(start, end):
     q = deque()
     q.appendleft(start)
-    visited = [0] * 10000
     visited[int(start)] = 1
     while q :
-        current = q.popleft()
-        if current == end :
-            return visited[int(current)] - 1
-        for i in range(4):
-            for j in range(9):
-                nStart = dx[j] % 10
-                result = int(current) + nStart * pow(10, 3-i)
-                if result // 1000 > 0 and result in primeNums and not visited[result] :
-                    visited[result] = visited[int(current)] + 1
-                    q.append(str(result))
+        current = int(q.popleft())
+        if current == int(end) :
+            return visited[current] - 1
+        for i in range(10):
+            if i != 0:
+                nx = (current % 1000) + i * 1000
+                if nx < 10000 and isPrime(nx) and not visited[nx]:
+                    visited[nx] = visited[current] + 1
+                    q.append(nx)
+            nx = int(current / 1000) * 1000 + (current % 100) + i * 100
+            if nx < 10000 and isPrime(nx) and  not visited[nx]:
+                visited[nx] = visited[current] + 1
+                q.append(nx)
+            nx = int(current/100)*100 + (current % 10) + i * 10
+            if nx < 10000 and isPrime(nx) and  not visited[nx]:
+                visited[nx] = visited[current] +1
+                q.append(nx)
+            nx = int(current / 10) * 10 + i
+            if nx < 10000 and isPrime(nx) and not visited[nx]:
+                visited[nx] = visited[current] + 1
+                q.append(nx)
     return -1
 
 t = int(sys.stdin.readline().strip())
-primeNums = primeList()
 for i in range(t):
     aNum, bNum = map(str, sys.stdin.readline().strip().split())
+    visited = [0] * 10000
     ans = bfs(aNum, bNum)
     print(ans if ans >= 0 else 'Impossible')
