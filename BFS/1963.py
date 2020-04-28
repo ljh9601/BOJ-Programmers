@@ -5,7 +5,7 @@
 # 문제 출처 : 백준 온라인 저지
 # 알고리즘 분류 : BFS
 # 두 소수 사이의 필요한 최소 변환 횟수
-# 
+
 import sys
 from collections import deque
 
