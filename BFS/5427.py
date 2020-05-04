@@ -4,6 +4,8 @@
 # 작성자 : 이장행
 # 문제 출처 : 백준 온라인 저지
 # 알고리즘 분류 : BFS
+# 탈출이 가능한지에 대한 여부
+# 불과 현재 나의 위치를 동시에 bfs 돌리면 된다.
 
 import sys
 from collections import deque
