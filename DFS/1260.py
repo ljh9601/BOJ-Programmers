@@ -38,7 +38,6 @@ if __name__ == "__main__":
             path[end] = set([])
         path[start].add(end)
         path[end].add(start)
-    print(path)
     if v not in path:
         print(v)
         print(v)
