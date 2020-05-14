@@ -4,7 +4,7 @@
 문제 번호 : 2234
 작성자 : 이장행
 문제 출처 : 백준 온라인 저지
-알고리즘 분류 : 다이나믹 프로그래밍
+알고리즘 분류 : BFS
 1. 이 성에 있는 방의 개수
 2. 가장 넓은 방의 넓이
 3. 하나의 벽을 제거하여 얻을 수 있는 가장 넓은 방의 크기
@@ -31,11 +31,11 @@ def wallInfo(detail) :
             canGo.append(i)
     return canGo
 
-def bfs(posX, posY) :
+def bfs(posX, posY, room) :
     q = deque()
     q.appendleft((posX, posY))
-    visited[posX][posY] = True
     width = 1
+    visited[posX][posY] = room
     while q :
         x, y = q.popleft()
         for i in board[x][y]:
@@ -44,7 +44,7 @@ def bfs(posX, posY) :
                 ny = y + dy[j]
                 if 0 <= nx < m and 0 <= ny < n :
                     if not visited[nx][ny] :
-                        visited[nx][ny] = True
+                        visited[nx][ny] = room
                         width += 1
                         q.append((nx, ny))
     return width
@@ -62,6 +62,20 @@ for i in range(m):
     for j in range(n):
         if not visited[i][j] :
             roomNo += 1
-            roomWidth.append(bfs(i, j))
+            roomWidth.append(bfs(i, j, roomNo))
+maxRoom = 0
+ans = [0] * roomNo
+for i in range(m):
+    for j in range(n):
+        ans[visited[i][j]-1] += 1
+for i in range(m):
+    for j in range(n):
+        for k in range(4):
+            nx = i + dx[k]
+            ny = j + dy[k]
+            if 0 <= nx < m and 0 <= ny < n :
+                if visited[i][j] != visited[nx][ny] :
+                    maxRoom = max(maxRoom, ans[visited[i][j]-1] + ans[visited[nx][ny]-1])
 print(roomNo)
 print(max(roomWidth))
+print(maxRoom)
