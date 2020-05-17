@@ -28,21 +28,41 @@ def canGo(curX, curY) :
             return [1]
         elif visited[curX+1][curY] > 0 :
             return [2]
+        else :
+            if board[curX][curY+1] in blocks :
+                return [1]
+            else :
+                return [2]
     if c == '2' :
         if visited[curX-1][curY] > 0 :
             return [2]
         elif visited[curX][curY+1] > 0 :
             return [0]
+        else :
+            if board[curX-1][curY] in blocks :
+                return [2]
+            else :
+                return [0]
     if c == '3' :
         if visited[curX][curY-1] > 0 :
             return [0]
         elif visited[curX-1][curY] > 0 :
             return [3]
+        else :
+            if board[curX][curY-1] in blocks :
+                return [0]
+            else :
+                return [3]
     if c == '4' :
         if visited[curX][curY-1] > 0 :
             return [1]
-        if visited[curX+1][curY] > 0 :
+        elif visited[curX+1][curY] > 0 :
             return [3]
+        else :
+            if board[curX][curY-1] in blocks :
+                return [1]
+            else :
+                return [3]
 
 def dfs(start) :
     stack = deque()
@@ -51,7 +71,6 @@ def dfs(start) :
     while stack :
         x, y = stack.pop()
         canGoList = canGo(x, y)
-        print(x, y)
         for i in canGoList :
             nx = x + dx[i]
             ny = y + dy[i]
@@ -70,14 +89,6 @@ def dfs(start) :
                                 ansList.append((nx, ny))
                             if (x-nx, y-ny) not in ansList :
                                 ansList.append((x-nx, y-ny))
-                                for k in range(4):
-                                    tempX = nx + dx[k]
-                                    tempY = ny + dy[k]
-                                    if 0 <= tempX < r and 0 <= tempY < c :
-                                        if not visited[tempX][tempY] and board[tempX][tempY] in blocks :
-                                            visited[tempX][tempY] = True
-                                            stack.append((tempX, tempY))
-                                            #print(tempX, tempY)
     return False
 def blockInsert(infoList) :
     global ret
@@ -107,7 +118,14 @@ for i in range(r):
             end = (i, j)
 if not dfs(start) :
     dfs(end)
-print(ansList)
+ansX = ansList[0][0]
+ansY = ansList[0][1]
+for i in range(4) :
+    ndx = ansX + dx[i]
+    ndy = ansY + dy[i]
+    if 0 <= ndx < r and 0 <= ndy < c :
+        if board[ndx][ndy] in blocks :
+            dfs((ndx, ndy))
 blockInsert(ansList)
 if ret not in connectInfo :
     for i in range(4):
@@ -118,6 +136,4 @@ if ret not in connectInfo :
                 ansList.append((dx[i], dy[i]))
     ret = 0
     blockInsert(ansList)
-for i in range(r):
-    print(visited[i])
 print('{} {} {}'.format(ansList[0][0]+1, ansList[0][1]+1, blocks[connectInfo.index(ret)]))
