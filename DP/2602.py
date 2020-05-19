@@ -12,7 +12,7 @@ import sys
 a = sys.stdin.readline().strip()
 devil = sys.stdin.readline().strip()
 angel = sys.stdin.readline().strip()
-dp = [[0] * 2 for _ in range(len(devil))] # 0 : 악마다리, 1 : 천사다리
+dp = [[0] * 2 for _ in range(len(a)+1)] # 0 : 악마다리, 1 : 천사다리
 dp[0] = [1, 1]
 length = len(a)
 length_d = len(devil)
