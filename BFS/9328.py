@@ -5,7 +5,7 @@
 작성자 : 이장행
 문제 출처 : 백준 온라인 저지
 알고리즘 분류 : BFS
-상근이가 훔칠 수 있는 문서의 최대 개수
+훔칠 수 있는 최대 서류가방의 개수
 '''
 import sys
 from collections import deque
