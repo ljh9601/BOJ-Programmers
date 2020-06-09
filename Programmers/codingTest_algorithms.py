@@ -284,4 +284,14 @@ print(bst.find(17)) # False
 print(bst.delete(55)) # True
 print(bst.delete(14)) # True
 print(bst.delete(11)) # False
+
+비트 연산자
+^(xor) 연산은 두개의 값이 다를 때만 참인 연산입니다.
+~(not) 연산은 1의 보수를 구합니다. 컴퓨터에서는 뺄셈을 2의 보수를 덧셈하여 처리 합니다.
+<< 연산은 왼쪽으로 1비트 밀때마다 두 배씩 늘어납니다.
+>> 연산은 오른쪽으로 1비트 밀때마다 1/2씩 줄어듭니다.
+n << m : n * 2의 m승
+n >> m : n / 2의 m승
 '''
+lost = []
+lost.pop()
