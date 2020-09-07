@@ -1,5 +1,5 @@
 # BOJ / Programmers
-# 백준 온라인 저지 / 
+# 백준 온라인 저지 / 프로그래머스
 
 Baekjoon Online Judge/ Programmers Solution with Python3
 
