@@ -1,7 +1,16 @@
 # BOJ / Programmers
+<br>
+
 # 백준 온라인 저지 / 프로그래머스
 
 Baekjoon Online Judge/ Programmers Solution with Python3
+
+<br>
+
+![](https://i.imgur.com/3lOd1Ch.png)
+
+<br>
+<br>
 
 You can find Probs with 
 
